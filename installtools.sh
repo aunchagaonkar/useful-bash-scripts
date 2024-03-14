@@ -1,15 +1,40 @@
+install_package() {
+    package=$1
+    manager=$2
+
+    if ! pacman -Q $package &> /dev/null
+    then
+        if [ $manager == "pacman" ]
+        then
+            sudo pacman -S $package
+        elif [ $manager == "yay" ]
+        then
+            yay -S $package
+        fi
+    else
+        echo "$package is already installed"
+    fi
+}
+
 sudo pacman -Syu #Upgrade all packages
-yay -S archlinux-tweak-tool-git arcolinux-app-glade-git oneko peazip-qt-bin update-grub cloudflare-warp-bin #Install essential tools
-yay -S microsoft-edge-stable-bin #Installs Microsoft Edge Browser
-yay -S ttf-anka-coder-condensed #Installs a best looking font using Yay Package manager
-yay -S visual-studio-code-bin #Installs visual studio code from AUR
-yay -S google-chrome #Installs google chrome on arch linux using Yay package manager
-yay -S easystroke #Installs a mouse gesture control application
-sudo pacman -Sy evince #Installs pdf reader
-sudo pacman -S vlc #Install essentials tools using pacman
-sudo pacman -S quadrapassel #Install game of Tetris on linux
-sudo pacman -S pulseaudio-bluetooth #Install if bluetooth is not working properly
-sudo pacman -S bucklespring #Install a fun keyboard tool
-sudo pacman -S qbitorrent #Install torrent client
-sudo pacman -S scrcpy #Install screen mirroring client for android using adb
-sudo pacman -S tlp #Install for power management in linux 
+
+# Install essential tools
+install_package "archlinux-tweak-tool-git" "yay"
+install_package "arcolinux-app-glade-git" "yay"
+install_package "oneko" "yay"
+install_package "peazip-qt-bin" "yay"
+install_package "update-grub" "yay"
+install_package "cloudflare-warp-bin" "yay"
+install_package "microsoft-edge-stable-bin" "yay"
+install_package "ttf-anka-coder-condensed" "yay"
+install_package "visual-studio-code-bin" "yay"
+install_package "google-chrome" "yay"
+install_package "easystroke" "yay"
+install_package "evince" "pacman"
+install_package "vlc" "pacman"
+install_package "quadrapassel" "pacman"
+install_package "pulseaudio-bluetooth" "pacman"
+install_package "bucklespring" "pacman"
+install_package "qbitorrent" "pacman"
+install_package "scrcpy" "pacman"
+install_package "tlp" "pacman"
