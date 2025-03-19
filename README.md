@@ -1,1 +1,1 @@
-# arch-bash-scripts
+# useful-bash-scripts
